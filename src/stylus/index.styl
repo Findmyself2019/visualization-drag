@@ -1,0 +1,66 @@
+// stylus公共样式声明处
+
+// 背景色
+bg-color = #3C4148
+
+// 主题色
+theme-color = #3896fe
+
+// 表单项背景色
+form-bg-color = #292f3a
+
+// 表单项高度
+form-height = 25px
+
+tooltip-bg = #ffffff
+
+// 字体
+fonts = -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'
+
+font-size-default = 12px
+
+box($type=border-box)
+  box-sizing $type
+
+vertical-center($height)
+  height $height
+  line-height $height
+
+// 滚动条样式
+scroll-style()
+  ::-webkit-scrollbar-corner
+    background-color transparent
+
+  ::-webkit-scrollbar
+    width 6px
+    height 6px
+    background-color transparent
+
+  ::-webkit-scrollbar-thumb
+    border-radius 6px
+    background-color hsla(0,0%,100%,.14)
+
+// 三角形
+triangle(position, size = 5px, color = #ffffff)
+  display inline-block
+  height 0
+  width 0
+  if position == top
+    border-bottom size solid color
+    border-left size solid transparent
+    border-right size solid transparent
+  else if position == bottom
+    border-top size solid color
+    border-left size solid transparent
+    border-right size solid transparent
+  else if position == right
+    border-left size solid color
+    border-top size solid transparent
+    border-bottom size solid transparent
+  else if position == left
+    border-right size solid color
+    border-top size solid transparent
+    border-bottom size solid transparent
+
+transition(time = 0.3s)
+  transition all time cubic-bezier(.645,.045,.355,1)
