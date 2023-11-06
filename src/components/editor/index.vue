@@ -115,7 +115,7 @@ export default {
         e.preventDefault()
       }
       this.hideArea()
-
+      this.$store.commit('hideContextMenu')
       const rectInfo = this.editor.getBoundingClientRect()
       this.editorX = rectInfo.x
       this.editorY = rectInfo.y

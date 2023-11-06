@@ -1,90 +1,104 @@
 <template>
-  <div
-    ref="editor"
-    class="editor-box"
-    :style="style"
-  ></div>
+  <div ref="editor" class="editor-box" :style="style"></div>
 </template>
 
 <script>
 import * as monaco from 'monaco-editor'
-const THEME_COLOR = '#292f3a'
+const THEME_COLOR = '#ffffff'
 export default {
-  name: "CodeEditor",
+  name: 'CodeEditor',
   model: {
     prop: 'code',
-    event: 'change'
+    event: 'change',
   },
   props: {
     height: {
       type: [Number, String],
-      default: 200
+      default: 200,
     },
-    code: { // 内容
+    code: {
+      // 内容
       type: String,
-      default: ''
+      default: '',
     },
-    language: { // 语言
+    language: {
+      // 语言
       type: String,
-      default: 'javascript'
+      default: 'javascript',
     },
-    theme: { // 主题
+    theme: {
+      // 主题
       type: String,
-      default: 'sv-dark'
+      default: 'sv-dark',
     },
-    showMiniMap: { // 是否显示缩略图
+    showMiniMap: {
+      // 是否显示缩略图
       type: Boolean,
-      default: false
+      default: false,
     },
-    contextmenu: { // 显示右键菜单
+    contextmenu: {
+      // 显示右键菜单
       type: Boolean,
-      default: false
+      default: false,
     },
-    fontSize: { // 默认字体大小
+    fontSize: {
+      // 默认字体大小
       type: Number,
-      default: 13
+      default: 13,
     },
-    quickSuggestions: {  // 智能提示
+    quickSuggestions: {
+      // 智能提示
       type: Boolean,
-      default: true
+      default: true,
     },
-    lineNumbers: { // 是否显示行数
+    lineNumbers: {
+      // 是否显示行数
       type: String,
-      default: 'on'
+      default: 'on',
     },
     readOnly: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     style() {
-      const {height} = this
+      const { height } = this
       return {
         height: typeof height === 'number' ? `${height}px` : height,
       }
-    }
+    },
   },
   mounted() {
-    const {language, code, showMiniMap, theme, contextmenu, fontSize, quickSuggestions, lineNumbers, readOnly} = this
+    const {
+      language,
+      code,
+      showMiniMap,
+      theme,
+      contextmenu,
+      fontSize,
+      quickSuggestions,
+      lineNumbers,
+      readOnly,
+    } = this
     this.setTheme()
     if (language === 'console') {
       // 注册console language
       monaco.languages.register({ id: 'console' })
-  
+
       // 为该语言注册一个颜色匹配正则
       monaco.languages.setMonarchTokensProvider('console', {
         tokenizer: {
           root: [
-            [/\[error.*/, "custom-error"],
-            [/\[notice.*/, "custom-notice"],
-            [/\[info.*/, "custom-info"],
-            [/\[[0-9\- 0-9:]+\]/, "custom-date"],
-          ]
-        }
+            [/\[error.*/, 'custom-error'],
+            [/\[notice.*/, 'custom-notice'],
+            [/\[info.*/, 'custom-info'],
+            [/\[[0-9\- 0-9:]+\]/, 'custom-date'],
+          ],
+        },
       })
     }
-  
+
     if (theme === 'console-theme') {
       // 定义一个只包含与该语言匹配的规则的新主题
       monaco.editor.defineTheme('console-theme', {
@@ -95,10 +109,10 @@ export default {
           { token: 'custom-error', foreground: 'ff0000', fontStyle: 'bold' },
           { token: 'custom-notice', foreground: 'FFA500' },
           { token: 'custom-date', foreground: '008800' },
-        ]
+        ],
       })
     }
-    
+
     this.monacoEditor = monaco.editor.create(this.$refs['editor'], {
       theme,
       language,
@@ -115,18 +129,17 @@ export default {
         horizontalScrollbarSize: 7,
       },
       minimap: {
-        enabled: showMiniMap
+        enabled: showMiniMap,
       },
-      automaticLayout: true // 自动布局
+      automaticLayout: true, // 自动布局
     })
-    
+
     this.monacoEditor.onDidChangeModelContent(() => {
       let value = this.monacoEditor.getValue()
       if (this.code !== value) {
         this.$emit('change', value)
       }
     })
-    
   },
   watch: {
     code(newValue) {
@@ -138,34 +151,33 @@ export default {
     },
     readOnly(val) {
       this.monacoEditor.updateOptions({
-        readOnly: val
+        readOnly: val,
       })
-    }
+    },
   },
   methods: {
     setTheme() {
       monaco.editor.defineTheme('sv-dark', {
         base: 'vs-dark',
         inherit: true,
-        rules: [
-        ],
+        rules: [],
         colors: {
           'editor.background': THEME_COLOR, // 背景色
           'editor.lineHighlightBackground': THEME_COLOR, //光标所在行高亮文本的背景颜色
-        }
+        },
       })
-    }
+    },
   },
   destroyed() {
     this.monacoEditor.dispose()
-  }
+  },
 }
 </script>
 
 <style lang="stylus">
-  .editor-box
-    min-height 200px
-    
-    .monaco-scrollable-element > .scrollbar > .slider
-      border-radius 20px
+.editor-box
+  min-height 200px
+
+  .monaco-scrollable-element > .scrollbar > .slider
+    border-radius 20px
 </style>

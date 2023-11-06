@@ -187,7 +187,7 @@ export default {
       cursor pointer
       background-color form-bg-color
       border 1px solid form-bg-color
-      color #ffffff
+      color #4d4d4d
       padding 0 10px 0 25px
       height form-height
       width 100%
@@ -223,7 +223,7 @@ export default {
     box-sizing content-box
     position: absolute;
     padding: 15px 15px 50px;
-    background: #292f3a;
+    background: #ffffff;
     top: 33px;
     z-index: 999;
     right 0
@@ -250,7 +250,7 @@ export default {
       left 0
       right 0
       margin auto
-      triangle(top, 5px, #292f3a)
+      triangle(top, 5px, #ffffff)
   &.bottom
     &::after
       content ''
@@ -259,5 +259,5 @@ export default {
       left 0
       right 0
       margin auto
-      triangle(bottom, 5px, #292f3a)
+      triangle(bottom, 5px, #ffffff)
 </style>

@@ -1,12 +1,15 @@
 /* eslint-disable */
-var ace = require('brace');
+var ace = require('brace')
 
-ace.define("ace/theme/sv-dark",["require","exports","module","ace/lib/dom"], function(acequire, exports, module) {
-  
-  exports.isDark = true;
-  exports.cssClass = "ace-sv-dark";
-  exports.cssText = ".ace-sv-dark .ace_gutter {\
-background: #292f3a;\
+ace.define(
+  'ace/theme/sv-dark',
+  ['require', 'exports', 'module', 'ace/lib/dom'],
+  function(acequire, exports, module) {
+    exports.isDark = true
+    exports.cssClass = 'ace-sv-dark'
+    exports.cssText =
+      '.ace-sv-dark .ace_gutter {\
+background: #ffffff;\
 color: #8F908A\
 }\
 .ace-sv-dark .ace_print-margin {\
@@ -101,7 +104,8 @@ color: #75715E\
 }\
 .ace-sv-dark .ace_indent-guide {\
 background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y\
-}";
-  var dom = acequire("../lib/dom");
-  dom.importCssString(exports.cssText, exports.cssClass);
-});
+}'
+    var dom = acequire('../lib/dom')
+    dom.importCssString(exports.cssText, exports.cssClass)
+  }
+)

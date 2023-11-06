@@ -291,7 +291,7 @@ import NumberInput from '@/setting-component/number-input/index.vue'
 import SvSelect from '@/setting-component/sv-select/index.vue'
 import Fold from '@/setting-component/fold/index.vue'
 import SvCheckbox from '@/setting-component/sv-checkbox/index'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions,mapMutations } from 'vuex'
 import FoldIn from '@/setting-component/fold-in/index'
 import SvColor from '@/setting-component/sv-color/index'
 import SvSelectOption from '@/setting-component/sv-select/sv-select-option'
@@ -342,7 +342,7 @@ export default {
     yAxis: {
       deep: true,
       handler(setting) {
-        this.changeComSetting({
+        this.updateComSetting({
           setting,
           key: 'yAxis',
         })
@@ -352,7 +352,7 @@ export default {
   },
   methods: {
     ...mapActions('echartsSetting', ['setYAxis']),
-    ...mapActions('pageComList', ['changeComSetting']),
+    ...mapMutations(['updateComSetting']),
     typeChange(type, index) {
       if (type === 'value') {
         this.$set(this.yAxis[index], 'min', this.min)

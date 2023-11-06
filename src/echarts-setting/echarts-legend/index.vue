@@ -68,7 +68,7 @@
           </form-row>
         </div>
       </fold-in>
-      <!-- <fold-in label="图例文本样式">
+      <fold-in label="图例文本样式">
         <div slot="content">
           <form-row label="文本颜色">
             <sv-color v-model="legend.textStyle.color" />
@@ -77,7 +77,7 @@
             <number-input v-model="legend.textStyle.fontSize" />
           </form-row>
         </div>
-      </fold-in> -->
+      </fold-in>
       <fold-in label="翻页(图例控制块)设置">
         <div slot="content">
           <form-row label="按钮页信息间距">
@@ -116,12 +116,12 @@
               <form-row label="页信息格式">
                 <sv-input class="fill" v-model="legend.pageFormatter" />
               </form-row>
-              <!-- <form-row label="字体颜色">
+              <form-row label="字体颜色">
                 <sv-color v-model="legend.pageTextStyle.color" />
               </form-row>
               <form-row label="字体大小">
                 <number-input v-model="legend.pageTextStyle.fontSize" />
-              </form-row> -->
+              </form-row>
             </div>
           </fold-in>
         </div>
@@ -134,11 +134,11 @@
 import FormRow from '@/setting-component/form-row/index.vue'
 import Fold from '@/setting-component/fold/index.vue'
 import SvCheckbox from '@/setting-component/sv-checkbox/index'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions,mapMutations } from 'vuex'
 import SvSelect from '@/setting-component/sv-select/index'
 import NumberInput from '@/setting-component/number-input/index'
 import FoldIn from '@/setting-component/fold-in/index'
-// import SvColor from '@/setting-component/sv-color/index'
+import SvColor from '@/setting-component/sv-color/index'
 import SvInput from '@/setting-component/sv-input/index'
 import EchartsPosition from '@/echarts-setting/echarts-position/index'
 import { ORIENT_TYPES } from '@/constants/echarts-constans'
@@ -212,7 +212,7 @@ export default {
     legend: {
       deep: true,
       handler(setting) {
-        this.changeComSetting({
+        this.updateComSetting({
           key: 'legend',
           setting,
         })
@@ -220,13 +220,14 @@ export default {
     },
   },
   methods: {
-    ...mapActions('pageComList', ['changeComSetting']),
+    ...mapMutations(['updateComSetting']),
+    ...mapActions('echartsSetting', ['setLegend']),
   },
   components: {
     SvSelectOption,
     EchartsPosition,
     SvInput,
-    // SvColor,
+    SvColor,
     FoldIn,
     NumberInput,
     SvSelect,

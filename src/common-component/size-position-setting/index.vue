@@ -38,16 +38,16 @@ import FormRow from '@/setting-component/form-row/index'
 import NumberInput from '@/setting-component/number-input/index'
 import Fold from '@/setting-component/fold/index'
 import FoldIn from '@/setting-component/fold-in/index'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'SizePositionSetting',
   computed: {
-    ...mapGetters('pageComList', ['focusComInfo']),
+    ...mapGetters(['focusComInfo']),
     sizeAndPos() {
       const { focusComInfo } = this
       if (focusComInfo.length === 1) {
-        return focusComInfo[0].sizeAndPos
+        return focusComInfo[0] ? focusComInfo[0].style : {}
       }
       return null
     },
@@ -64,7 +64,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions('pageComList', ['changeComSizeAndPos']),
+    ...mapMutations(['changeComSizeAndPos']),
   },
   components: {
     FormRow,

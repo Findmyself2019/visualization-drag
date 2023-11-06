@@ -48,7 +48,7 @@ export default {
     grid: {
       deep: true,
       handler(setting) {
-        this.changeComSetting({
+        this.updateComSetting({
           setting,
           key: 'grid',
         })

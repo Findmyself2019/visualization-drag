@@ -66,7 +66,6 @@ export default {
       const rectInfo = this.editor.getBoundingClientRect()
       if (index) {
         const component = deepCopy(componentListData[index])
-        console.log(componentListData, index)
         //拖拽到编辑区的位置计算：top：clientY - 编辑区距离页面顶部 - 组件自身高度一半
         component.style.top =
           e.clientY - rectInfo.y - component.style.height / 2
@@ -75,8 +74,9 @@ export default {
         component.id = generateID()
         this.$store.commit('addComponent', { component })
         //拖拽至编辑区的组件应为选中状态
-        this.$store.commit('setCurComponent', { component, index: index })
+        this.$store.commit('setCurComponent', { component, index, id:component.id})
         this.$store.commit('setCurrentSettingPath', component.settingPath)
+        this.$store.commit('changeComSizeAndPos', {id:component.id, sizeAndPos: {left:component.style.left, top:component.style.top, width: component.style.width, height: component.style.height}})
       }
     },
     handleMouseDown() {

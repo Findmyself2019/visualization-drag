@@ -6,7 +6,18 @@ import {
   DEFAULT_BASE_BAR_TOOLTIP_SETTING,
   DEFAULT_BASE_BAR_SERIES_SETTING,
   DEFAULT_BASE_BAR_DATASET_SETTING,
+  DEFAULT_BASE_BAR_LEGEND_SETTING
 } from "@/common-component/barChart/default-setting"
+import {
+  DEFAULT_BASE_LINE_TITLE_SETTING,
+  DEFAULT_BASE_LINE_GRID_SETTING,
+  DEFAULT_BASE_LINE_X_AXIS_SETTING,
+  DEFAULT_BASE_LINE_Y_AXIS_SETTING,
+  DEFAULT_BASE_LINE_TOOLTIP_SETTING,
+  DEFAULT_BASE_LINE_SERIES_SETTING,
+  DEFAULT_BASE_LINE_DATASET_SETTING,
+  DEFAULT_BASE_LINE_LEGEND_SETTING
+} from "@/common-component/lineChart/default-setting"
 // 公共样式
 export const commonStyle = {
   rotate: 0,
@@ -94,8 +105,8 @@ const list = [
     label: '柱状图',
     icon: 'button',
     style: {
-      width: 300,
-      height: 200,
+      width: 470,
+      height: 270,
       borderRadius: '',
     },
     settingPath: 'common-component/barChart/index.vue',
@@ -106,7 +117,33 @@ const list = [
       yAxis: DEFAULT_BASE_BAR_Y_AXIS_SETTING,
       tooltip: DEFAULT_BASE_BAR_TOOLTIP_SETTING,
       series: [DEFAULT_BASE_BAR_SERIES_SETTING],
-      dataset: DEFAULT_BASE_BAR_DATASET_SETTING
+      dataset: DEFAULT_BASE_BAR_DATASET_SETTING,
+      legend:DEFAULT_BASE_BAR_LEGEND_SETTING
+    },
+    defaultSize: {
+      width: 470,
+      height: 270
+    }
+  },
+  {
+    component: 'lineChart',
+    label: '折线图',
+    icon: 'button',
+    style: {
+      width: 300,
+      height: 200,
+      borderRadius: '',
+    },
+    settingPath: 'common-component/lineChart/index.vue',
+    setting: { 
+      title: DEFAULT_BASE_LINE_TITLE_SETTING,
+      grid: DEFAULT_BASE_LINE_GRID_SETTING,
+      xAxis: DEFAULT_BASE_LINE_X_AXIS_SETTING,
+      yAxis: DEFAULT_BASE_LINE_Y_AXIS_SETTING,
+      tooltip: DEFAULT_BASE_LINE_TOOLTIP_SETTING,
+      series: [DEFAULT_BASE_LINE_SERIES_SETTING],
+      dataset: DEFAULT_BASE_LINE_DATASET_SETTING,
+      legend:DEFAULT_BASE_LINE_LEGEND_SETTING
     },
     defaultSize: {
       width: 470,

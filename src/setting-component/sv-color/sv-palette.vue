@@ -317,7 +317,7 @@ export default {
       left 0
       right 0
       margin auto
-      triangle(top, 5px, #292f3a)
+      triangle(top, 5px, #ffffff)
   &.bottom
     &::after
       content ''
@@ -326,7 +326,7 @@ export default {
       left 0
       right 0
       margin auto
-      triangle(bottom, 5px, #292f3a)
+      triangle(bottom, 5px, #ffffff)
   .show-content
     width 100px
     height 100px

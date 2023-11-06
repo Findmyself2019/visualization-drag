@@ -1,8 +1,9 @@
 <template>
   <div class="vd-right-side">
     <div class="setting-area">
-      <component :is="currentCom" />
+      <component :is="currentCom" v-if="curComponent"/>
       <!-- <loading :loading="loading" /> -->
+      <div class="empty" v-else>请选择组件！</div>
     </div>
   </div>
 </template>
@@ -19,12 +20,11 @@ export default {
     }
   },
   computed: {
-    ...mapState(['settingPath'])
+    ...mapState(['settingPath','curComponent'])
   },
   watch: {
     'settingPath': {
       async handler () {
-        console.log(5345345345)
         this.loading = true
         // 先销毁组件
         this.currentCom = null
@@ -42,6 +42,13 @@ export default {
     height: 100%;
     .setting-area{
       height: 100%;
+      ::v-deep .el-tabs{
+        height: 100%;  
+      }
+      ::v-deep .el-tabs__content{
+        height: calc(100% - 55px);
+        overflow-y: auto;
+      }
     }
   }
 </style>

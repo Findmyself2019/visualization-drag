@@ -171,7 +171,7 @@ export default {
         box()
         width: 100%;
         height form-height
-        color #fff
+        color #4d4d4d
         padding 0 20px 0 7px
         border 1px solid form-bg-color
         background-color form-bg-color

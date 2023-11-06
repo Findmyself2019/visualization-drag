@@ -13,30 +13,51 @@ const data = {
     ...snapshot.state,
     canvasStyleData: {
       // 页面全局数据
-      width: 1200,
+      width: '100%',
       height: 940,
       scale: 100,
     },
     curComponent: null,
     curComponentIndex: 0,
+    focusCom:[],
     componentData: [], // 画布组件数据
     isClickComponent: false,
-    settingPath: '', //当前配置路径
+    settingPath: 'common-component/page-setting/index.vue', //当前配置路径
+  },
+  getters: {
+    focusComInfo (state) {
+      return state.focusCom.reduce((pre, id) => {
+        const com = state.componentData.filter(item => item.id === id)[0]
+        pre.push(com)
+        return pre
+      }, [])
+    },
   },
   mutations: {
     ...compose.mutations,
     ...contextmenu.mutations,
     ...snapshot.mutations,
-    addComponent(state, { component, index }) {
+    /**
+     * 添加组件
+     * @param {Object} state 
+     * @param {*} param1 
+     */
+    addComponent (state, { component, index }) {
       if (index !== undefined) {
         state.componentData.splice(index, 0, component)
       } else {
         state.componentData.push(component)
       }
     },
-    setCurComponent (state, { component, index }) {
+    /**
+     * 设置当前激活的组件
+     * @param {*} state 
+     * @param {*} param1 
+     */
+    setCurComponent (state, { component, index,id}) {
       state.curComponent = component
       state.curComponentIndex = index
+      state.focusCom = [id]
       //设置当前配置路径
       this.commit('setCurrentSettingPath', component.settingPath)
       // //设置echarts配置
@@ -108,26 +129,32 @@ const data = {
 
       data && this.dispatch('comDataSetting/initData', data, { root: true })
     },
-    setClickComponentStatus(state, status) {
+    setClickComponentStatus (state, status) {
       state.isClickComponent = status
     },
-    setComponentData(state, componentData = []) {
+    setComponentData (state, componentData = []) {
       Vue.set(state, 'componentData', componentData)
     },
-    setShapeStyle(state, { top, left, width, height, rotate }) {
+    setShapeStyle (state, { top, left, width, height, rotate }) {
       if (top) state.curComponent.style.top = top
       if (left) state.curComponent.style.left = left
       if (width) state.curComponent.style.width = width
       if (height) state.curComponent.style.height = height
       if (rotate) state.curComponent.style.rotate = rotate
     },
-    setShapeSingleStyle({ curComponent }, { key, value }) {
+    setShapeSingleStyle ({ curComponent }, { key, value }) {
       curComponent.style[key] = value
     },
-    setCurrentSettingPath(state, path) {
+    setCurrentSettingPath (state, path) {
       state.settingPath = path
     },
-    updateComSetting(state, {key, setting}) {
+    /**
+     * 更新组件配置信息
+     * @param {*} state 
+     * @param {*} param1 
+     * @returns 
+     */
+    updateComSetting (state, { key, setting }) {
       // 有key则更新setting的单个字段
       if (key) {
         for (let i = 0; i < state.componentData.length; i++) {
@@ -170,6 +197,16 @@ const data = {
       //     }
       //   }
       // })
+    },
+    /**
+     * 设置组件位置信息
+     */
+    changeComSizeAndPos (state, {id, sizeAndPos}) {
+      state.componentData.forEach(item => {
+        if (item.id === id) {
+          item.style = sizeAndPos
+        }
+      })
     },
   },
   modules: {

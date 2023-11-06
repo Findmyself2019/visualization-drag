@@ -1,5 +1,7 @@
+// import echarts from 'echarts'
+
 // title默认设置
-export const DEFAULT_BASE_BAR_TITLE_SETTING = [{
+export const DEFAULT_BASE_LINE_TITLE_SETTING = [{
   show: true,
   text: '标题',
   subtext: '副标题',
@@ -20,7 +22,7 @@ export const DEFAULT_BASE_BAR_TITLE_SETTING = [{
   left: 'center'
 }]
 // legend默认设置
-export const DEFAULT_BASE_BAR_LEGEND_SETTING = {
+export const DEFAULT_BASE_LINE_LEGEND_SETTING = {
   show: true,
   height: 150,
   width: 150,
@@ -50,9 +52,8 @@ export const DEFAULT_BASE_BAR_LEGEND_SETTING = {
     fontSize: 12
   }
 }
-
 // grid默认设置
-export const DEFAULT_BASE_BAR_GRID_SETTING = {
+export const DEFAULT_BASE_LINE_GRID_SETTING = {
   show: false,
   left: 50,
   top: 80,
@@ -61,7 +62,8 @@ export const DEFAULT_BASE_BAR_GRID_SETTING = {
 }
 
 // xAxis默认设置
-export const DEFAULT_BASE_BAR_X_AXIS_SETTING = [{
+// TODO 数据问题
+export const DEFAULT_BASE_LINE_X_AXIS_SETTING = [{
   show: true,
   type: 'category',
   name: 'x轴',
@@ -123,7 +125,7 @@ export const DEFAULT_BASE_BAR_X_AXIS_SETTING = [{
 }]
 
 // yAxis默认设置
-export const DEFAULT_BASE_BAR_Y_AXIS_SETTING = [{
+export const DEFAULT_BASE_LINE_Y_AXIS_SETTING = [{
   show: true,
   type: 'value',
   name: 'y轴',
@@ -173,7 +175,7 @@ export const DEFAULT_BASE_BAR_Y_AXIS_SETTING = [{
 }]
 
 // tooltip默认配置
-export const DEFAULT_BASE_BAR_TOOLTIP_SETTING = {
+export const DEFAULT_BASE_LINE_TOOLTIP_SETTING = {
   show: true,
   trigger: 'axis',
   backgroundColor: 'rgba(50, 50, 50, 0.7)',
@@ -209,21 +211,48 @@ export const DEFAULT_BASE_BAR_TOOLTIP_SETTING = {
 }
 
 // series默认设置
-export const DEFAULT_BASE_BAR_SERIES_SETTING = {
+export const DEFAULT_BASE_LINE_SERIES_SETTING = {
   datasetIndex: 0,
+  type: 'line',
+  symbol: 'circle',
+  symbolSize: 12,
+  symbolRotate: 0,
+  showSymbol: true,
+  showAllSymbol: 'auto',
+  connectNulls: true,
+  step: false,
+  smooth: false,
   label: {
     show: true,
     fontSize: 16,
     color: "#ffffff",
-    position: 'top',
+    position: 'top'
   },
   itemStyle: {
     color: '#F0CC5A',
     opacity: 1,
-    barBorderRadius: [0, 0, 0, 0]
   },
-  barWidth: 'auto',
-  barMinHeight: 0,
+  lineStyle: {
+    color: '#F0CC5A',
+    width: 2,
+    type: 'solid',
+    opacity: 1
+  },
+  areaStyle: {
+    // color: new echarts.graphic.LinearGradient(
+    //   0, 0, 0, 1,
+    //   [
+    //     {
+    //       offset: 0, color: '#F0CC5A'
+    //     },
+    //     {
+    //       offset: 1, color: 'rgba(255, 255, 255, 0)'
+    //     }
+    //   ]
+    // ),
+    color: '#F0CC5A',
+    opacity: 0 // 为0不进行绘制
+  },
   markPoint: {
     data: []
   },
@@ -234,15 +263,20 @@ export const DEFAULT_BASE_BAR_SERIES_SETTING = {
     x: 'product',
     y: 'score',
   },
-  type: 'bar'
 }
 
 // dataset默认设置
-export const DEFAULT_BASE_BAR_DATASET_SETTING = {
-  source:  [
+export const DEFAULT_BASE_LINE_DATASET_SETTING = {
+  source: [
       {product: 'Latte', count: 823, score: 95.8},
       {product: 'Tea', count: 235, score: 81.4},
       {product: 'Cocoa', count: 1042, score: 91.2},
       {product: 'Brownie', count: 988, score: 76.9}
-    ],
+  ],
+    handleFunction: function (data) {
+      // data为原始数据
+      // console.log(data)
+      return data
+    }
 }
+

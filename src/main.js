@@ -5,7 +5,6 @@ import router from './router'
 import '@/common-component' // 注册自定义组件
 import '@/assets/iconfont/iconfont.css'
 import '@/plugins/index.js'
-
 Vue.config.productionTip = false
 
 // 引入echarts各图表的默认配置

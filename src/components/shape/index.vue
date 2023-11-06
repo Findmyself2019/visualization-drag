@@ -22,8 +22,8 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
-import eventBus from '@/utils/eventBus'
+import { mapActions, mapMutations } from 'vuex'
+// import eventBus from '@/utils/eventBus'
 export default {
   name: 'Shape',
   data() {
@@ -74,6 +74,7 @@ export default {
   },
   methods: {
     ...mapActions('markline', ['guideLineBuilder']),
+    ...mapMutations('setShapeStyle','setClickComponentStatus','setCurComponent'),
     isActive() {
       return this.active && !this.element.isLock
     },
@@ -92,6 +93,7 @@ export default {
       this.$store.commit('setCurComponent', {
         component: this.element,
         index: this.index,
+        id:this.element.id
       })
       if (
         this.element.component != 'v-text' &&
@@ -99,7 +101,6 @@ export default {
       ) {
         e.preventDefault()
       }
-
       //阻止向父组件冒泡，防止触发鼠标选择区域事件
       e.stopPropagation()
       //组件被锁定，则无法移动
@@ -123,6 +124,7 @@ export default {
         hasMove = true
         const curX = moveEvent.clientX
         const curY = moveEvent.clientY
+        console.log(comPosition)
         comPosition.top = curY - startY + comStartTop
         comPosition.left = curX - startX + comStartLeft
         // this.guideLineBuilder()
@@ -133,7 +135,7 @@ export default {
           // 后面两个参数代表鼠标移动方向
           // curY - startY > 0 true 表示向下移动 false 表示向上移动
           // curX - startX > 0 true 表示向右移动 false 表示向左移动
-          eventBus.$emit('move', curY - startY > 0, curX - startX > 0)
+          // eventBus.$emit('move', curY - startY > 0, curX - startX > 0)
         })
       }
 
@@ -146,7 +148,9 @@ export default {
       document.addEventListener('mousemove', move)
       document.addEventListener('mouseup', up)
     },
-    handleMouseDownOnPoint() {},
+    handleMouseDownOnPoint () {
+
+    },
     getPointStyle(point) {
       const { width, height } = this.defaultStyle
       const hasT = /t/.test(point)

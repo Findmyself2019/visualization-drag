@@ -55,7 +55,7 @@ export default {
   name: "SvSelect",
   props: {
     value: {
-      type: [String, Number, Boolean, Array],
+      type: [String, Number, Boolean, Array,Object],
       default: ''
     },
     placeholder: {
@@ -260,7 +260,7 @@ export default {
         background transparent
         height 100%
         padding 0 22px 0 8px
-        color #ffffff
+        color #4d4d4d
         float left
         text-overflow ellipsis
 
